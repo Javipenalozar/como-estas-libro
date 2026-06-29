@@ -315,6 +315,39 @@
         font-size: 0.98rem;
       }
 
+      .reader-shell {
+        overflow: hidden;
+        background: rgba(242, 237, 228, 0.06);
+        border: 1px solid rgba(217, 164, 65, 0.28);
+        border-radius: 0.8rem;
+        box-shadow: var(--shadow);
+      }
+
+      .reader-frame {
+        display: block;
+        width: 100%;
+        height: min(76vh, 52rem);
+        background: #111827;
+        border: 0;
+      }
+
+      .reader-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.85rem;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .reader-actions p {
+        max-width: 42rem;
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
       .book-wrap {
         display: grid;
         place-items: center;
@@ -674,6 +707,10 @@
         .step {
           grid-template-columns: 1fr;
         }
+
+        .reader-frame {
+          height: 72vh;
+        }
       }
     </style>
   </head>
@@ -687,6 +724,7 @@
         <div class="nav-links">
           <a href="#libro">El libro</a>
           <a href="#comprar">Comprar</a>
+          <a href="#muestra">Muestra</a>
           <a href="#autor">Autor</a>
           <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Comprar ahora</a>
         </div>
@@ -704,7 +742,7 @@
             </p>
             <div class="hero-actions">
               <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Pagar preventa $47.000</a>
-              <a class="button secondary" href="#comprar">Ver detalles de compra</a>
+              <a class="button secondary" href="#muestra">Leer capítulo 1</a>
             </div>
             <div class="launch-strip" aria-label="Datos de lanzamiento">
               <div class="launch-item">
@@ -853,6 +891,34 @@
                   <strong>Responder</strong>
                   <p>Elegir con más presencia cómo vivir, vincularte y cuidarte.</p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="muestra" class="section-dark">
+          <div class="inner">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Muestra gratis</p>
+                <h2>Lee el capítulo 1 aquí.</h2>
+              </div>
+              <p>
+                Una primera entrada al tono del libro antes de comprarlo. La lectura se abre
+                dentro de esta página para que puedas decidir con calma.
+              </p>
+            </div>
+            <div class="reader-shell">
+              <iframe
+                class="reader-frame"
+                src="assets/downloads/cap1.pdf#toolbar=0&navpanes=0&scrollbar=1"
+                title="Capítulo 1 de ¿Cómo estás?"
+              ></iframe>
+              <div class="reader-actions">
+                <p>
+                  Si el visor no carga en tu navegador, vuelve a esta página desde Chrome, Safari o Edge.
+                </p>
+                <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Comprar el libro</a>
               </div>
             </div>
           </div>
