@@ -1,0 +1,23 @@
+[build]
+  publish = "outputs"
+  command = ""
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[redirects]]
+  from = "/libro"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/como-estas"
+  to = "/"
+  status = 301
