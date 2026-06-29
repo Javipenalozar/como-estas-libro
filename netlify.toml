@@ -1,11 +1,16 @@
 [build]
-  publish = "outputs"
+  publish = "site"
   command = ""
 
 [[headers]]
-  for = "/*.png"
+  for = "/assets/images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/downloads/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
 
 [[headers]]
   for = "/*.html"
