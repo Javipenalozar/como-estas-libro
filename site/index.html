@@ -121,6 +121,13 @@
         box-shadow: none;
       }
 
+      .button.whatsapp {
+        color: var(--bone);
+        background: transparent;
+        border: 1px solid rgba(217, 164, 65, 0.45);
+        box-shadow: none;
+      }
+
       .hero {
         position: relative;
         min-height: 94svh;
@@ -222,6 +229,90 @@
         display: block;
         margin-top: 0.25rem;
         font-size: clamp(1rem, 2vw, 1.25rem);
+      }
+
+      .price-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 0.72fr) minmax(18rem, 1fr);
+        gap: clamp(1.25rem, 4vw, 2rem);
+        align-items: stretch;
+        margin-top: 2.25rem;
+      }
+
+      .price-box,
+      .stock-box {
+        padding: clamp(1.25rem, 3vw, 2rem);
+        background: rgba(242, 237, 228, 0.06);
+        border: 1px solid rgba(217, 164, 65, 0.26);
+        border-radius: 0.8rem;
+      }
+
+      .price-label,
+      .stock-label {
+        color: var(--gold-2);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .price {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem 1rem;
+        align-items: baseline;
+        margin: 0.5rem 0 0.6rem;
+      }
+
+      .price-current {
+        color: var(--bone);
+        font-size: clamp(2.4rem, 6vw, 4.7rem);
+        font-weight: 950;
+        line-height: 0.9;
+      }
+
+      .price-full {
+        color: var(--muted);
+        font-weight: 800;
+        text-decoration: line-through;
+      }
+
+      .saving {
+        color: var(--gold-2);
+        font-weight: 850;
+      }
+
+      .stock-count {
+        margin: 0.45rem 0 0.9rem;
+        color: var(--bone);
+        font-size: clamp(1.7rem, 4vw, 3.2rem);
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .stock-count span {
+        color: var(--gold-2);
+      }
+
+      .stock-bar {
+        overflow: hidden;
+        height: 0.75rem;
+        margin-bottom: 0.85rem;
+        background: rgba(242, 237, 228, 0.1);
+        border-radius: 999px;
+      }
+
+      .stock-fill {
+        width: var(--remaining, 100%);
+        height: 100%;
+        background: linear-gradient(90deg, var(--gold), var(--gold-2));
+        border-radius: inherit;
+      }
+
+      .trust-note {
+        margin: 0.9rem 0 0;
+        color: var(--muted);
+        font-size: 0.98rem;
       }
 
       .book-wrap {
@@ -452,6 +543,12 @@
         margin-bottom: 0.75rem;
       }
 
+      .payment-note {
+        margin-top: 1rem;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
       .email-form {
         display: flex;
         width: min(42rem, 100%);
@@ -525,6 +622,7 @@
         }
 
         .launch-strip,
+        .price-panel,
         .chapter-grid,
         .fragments {
           grid-template-columns: 1fr;
@@ -590,7 +688,7 @@
           <a href="#libro">El libro</a>
           <a href="#comprar">Comprar</a>
           <a href="#autor">Autor</a>
-          <a class="button" href="https://wa.me/573238016527?text=Hola%2C%20quiero%20comprar%20o%20reservar%20%C2%BFC%C3%B3mo%20est%C3%A1s%3F">Comprar ahora</a>
+          <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Comprar ahora</a>
         </div>
       </nav>
 
@@ -605,21 +703,21 @@
               que cambia cómo vives y cómo amas.
             </p>
             <div class="hero-actions">
-              <a class="button" href="https://wa.me/573238016527?text=Hola%2C%20quiero%20comprar%20o%20reservar%20%C2%BFC%C3%B3mo%20est%C3%A1s%3F">Comprar o reservar por WhatsApp</a>
+              <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Pagar preventa $47.000</a>
               <a class="button secondary" href="#comprar">Ver detalles de compra</a>
             </div>
             <div class="launch-strip" aria-label="Datos de lanzamiento">
               <div class="launch-item">
-                <span>Libro</span>
-                <strong>No ficción emocional</strong>
+                <span>Preventa</span>
+                <strong>$47.000 COP</strong>
               </div>
               <div class="launch-item">
-                <span>Autor</span>
-                <strong>Javi Peñaloza</strong>
+                <span>Precio full</span>
+                <strong>$79.900 COP</strong>
               </div>
               <div class="launch-item">
-                <span>Fecha</span>
-                <strong>2 de septiembre</strong>
+                <span>Cupos especiales</span>
+                <strong><span id="heroRemaining">100</span> de 100</strong>
               </div>
             </div>
           </div>
@@ -670,30 +768,52 @@
             <div class="section-head">
               <div>
                 <p class="eyebrow">Adquiere el libro</p>
-                <h2>Reserva tu ejemplar en preventa.</h2>
+                <h2>Compra tu ejemplar en preventa.</h2>
               </div>
               <p>
-                Esta página está diseñada para comprar o apartar el libro. Al tocar el botón,
-                se abre WhatsApp con el mensaje listo para confirmar disponibilidad, precio,
-                pago y entrega.
+                El precio especial está disponible para los primeros 100 ejemplares. Al tocar
+                el botón de pago, irás a Bold para completar la compra de forma segura.
               </p>
+            </div>
+            <div class="price-panel">
+              <div class="price-box">
+                <div class="price-label">Precio de preventa</div>
+                <div class="price">
+                  <div class="price-current">$47.000</div>
+                  <div class="price-full">$79.900</div>
+                </div>
+                <div class="saving">Ahorras $32.900 antes del lanzamiento.</div>
+                <p class="trust-note">
+                  Pago seguro a Jv bienestar y salud mental, comercio verificado en Bold.
+                </p>
+              </div>
+              <div class="stock-box">
+                <div class="stock-label">Disponibilidad con precio especial</div>
+                <div class="stock-count">Quedan <span id="remainingCount">100</span></div>
+                <div class="stock-bar" aria-label="Ejemplares disponibles en preventa">
+                  <div class="stock-fill" id="stockFill"></div>
+                </div>
+                <p class="trust-note">
+                  Solo 100 ejemplares con precio de preventa. Después, el libro pasará a $79.900 COP.
+                </p>
+              </div>
             </div>
             <div class="fragments">
               <article class="quote">
-                <p>Compra directa por WhatsApp, con atención personal para resolver forma de pago y entrega.</p>
+                <p>Paga $47.000 COP en el checkout seguro de Bold.</p>
                 <span>Paso 1</span>
               </article>
               <article class="quote">
-                <p>Reserva antes del lanzamiento del 2 de septiembre y asegura tu ejemplar de la primera salida.</p>
+                <p>Asegura uno de los 100 cupos con precio especial de preventa.</p>
                 <span>Paso 2</span>
               </article>
               <article class="quote">
-                <p>Recibe la información de precio, envío y confirmación directamente en la conversación.</p>
+                <p>Recibe confirmación de pago y detalles de entrega.</p>
                 <span>Paso 3</span>
               </article>
               <article class="quote">
-                <p>También puedes dejar tu correo para recibir el aviso de lanzamiento y novedades de compra.</p>
-                <span>Opcional</span>
+                <p>Si tienes dudas antes de pagar, puedes escribir por WhatsApp.</p>
+                <span>Soporte</span>
               </article>
             </div>
           </div>
@@ -765,8 +885,15 @@
               <p class="eyebrow">Preventa</p>
               <h2>Reserva tu ejemplar antes del lanzamiento.</h2>
               <p class="wide-copy">
-                Escríbenos por WhatsApp para comprar o apartar el libro. Te responderemos con
-                precio, forma de pago, disponibilidad y detalles de entrega.
+                Paga de forma segura por Bold y asegura el precio especial de $47.000 COP.
+                El precio full será $79.900 COP después de la preventa.
+              </p>
+              <div class="hero-actions">
+                <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Pagar con Bold</a>
+                <a class="button whatsapp" href="https://wa.me/573238016527?text=Hola%2C%20tengo%20una%20pregunta%20antes%20de%20comprar%20%C2%BFC%C3%B3mo%20est%C3%A1s%3F">Tengo una pregunta</a>
+              </div>
+              <p class="payment-note">
+                Vas a pagar $47.000 COP a Jv bienestar y salud mental, un negocio Master en Bold con datos verificados.
               </p>
               <form class="email-form" id="emailForm">
                 <input type="email" id="email" name="email" placeholder="tu correo" aria-label="Correo electrónico" required>
@@ -774,7 +901,7 @@
               </form>
               <div class="form-note" id="formNote" role="status"></div>
             </div>
-            <a class="button" href="https://wa.me/573238016527?text=Hola%2C%20quiero%20comprar%20o%20reservar%20%C2%BFC%C3%B3mo%20est%C3%A1s%3F">Comprar por WhatsApp</a>
+            <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Comprar ahora</a>
           </div>
         </section>
       </main>
@@ -785,14 +912,24 @@
             <div class="signature">Es posible <span class="butterfly">✦</span></div>
             <div>¿Cómo estás? · Javi Peñaloza · Lanzamiento 2 de septiembre</div>
           </div>
-          <a href="https://wa.me/573238016527?text=Hola%2C%20quiero%20comprar%20o%20reservar%20%C2%BFC%C3%B3mo%20est%C3%A1s%3F">WhatsApp</a>
+          <a href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Comprar con Bold</a>
         </div>
       </footer>
     </div>
 
     <script>
+      const PREORDER_TOTAL = 100;
+      const PREORDER_REMAINING = 100;
       const form = document.querySelector("#emailForm");
       const note = document.querySelector("#formNote");
+      const remainingCount = document.querySelector("#remainingCount");
+      const heroRemaining = document.querySelector("#heroRemaining");
+      const stockFill = document.querySelector("#stockFill");
+
+      const remainingPercent = Math.max(0, Math.min(100, (PREORDER_REMAINING / PREORDER_TOTAL) * 100));
+      remainingCount.textContent = PREORDER_REMAINING;
+      heroRemaining.textContent = PREORDER_REMAINING;
+      stockFill.style.setProperty("--remaining", `${remainingPercent}%`);
 
       form.addEventListener("submit", (event) => {
         event.preventDefault();
