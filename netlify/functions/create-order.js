@@ -32,10 +32,12 @@ async function insertOrder(order) {
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl || !serviceRoleKey) {
-    throw new Error("Missing Supabase environment variables");
+    const error = new Error("Faltan variables de Supabase en Netlify.");
+    error.publicMessage = "Faltan variables de Supabase en Netlify.";
+    throw error;
   }
 
-  const response = await fetch(`${supabaseUrl}/rest/v1/book_orders`, {
+  const response = await fetch(`${supabaseUrl.replace(/\/$/, "")}/rest/v1/book_orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -49,7 +51,11 @@ async function insertOrder(order) {
   const payload = await response.json().catch(() => null);
 
   if (!response.ok) {
-    throw new Error(`Supabase insert failed: ${response.status} ${JSON.stringify(payload)}`);
+    const error = new Error(`Supabase insert failed: ${response.status} ${JSON.stringify(payload)}`);
+    error.status = response.status;
+    error.supabasePayload = payload;
+    error.publicMessage = `Supabase no aceptó la reserva (${response.status}).`;
+    throw error;
   }
 
   return Array.isArray(payload) ? payload[0] : payload;
@@ -111,6 +117,13 @@ exports.handler = async (event) => {
     });
   } catch (error) {
     console.error(error);
-    return json(500, { error: "No pudimos crear la reserva. Intenta de nuevo." });
+    return json(500, {
+      error: error.publicMessage || "No pudimos crear la reserva. Intenta de nuevo.",
+      debug:
+        error.supabasePayload?.message ||
+        error.supabasePayload?.hint ||
+        error.supabasePayload?.code ||
+        null,
+    });
   }
 };
