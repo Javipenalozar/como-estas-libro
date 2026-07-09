@@ -72,20 +72,64 @@
       .brand {
         display: flex;
         align-items: center;
-        gap: 0.65rem;
-        font-weight: 800;
+        gap: 0.75rem;
+        color: var(--coal);
         letter-spacing: 0;
+        text-decoration: none;
       }
 
       .mark {
-        display: grid;
-        width: 2rem;
-        height: 2rem;
+        position: relative;
+        display: inline-flex;
+        width: 3.7rem;
+        height: 2.35rem;
+        align-items: center;
+        justify-content: center;
         place-items: center;
         color: var(--bone);
-        background: var(--coal);
-        border: 1px solid rgba(43, 36, 24, 0.45);
-        border-radius: 50%;
+        background:
+          linear-gradient(135deg, rgba(255, 217, 90, 0.22), transparent 44%),
+          linear-gradient(135deg, var(--coal), var(--warm-black));
+        border: 1px solid rgba(43, 36, 24, 0.62);
+        border-radius: 0.7rem;
+        box-shadow: 0 12px 30px rgba(43, 36, 24, 0.28);
+        font-size: 1.18rem;
+        font-weight: 950;
+        letter-spacing: -0.08em;
+        line-height: 1;
+      }
+
+      .mark::after {
+        position: absolute;
+        left: 0.58rem;
+        right: 0.58rem;
+        bottom: 0.35rem;
+        height: 1px;
+        content: "";
+        background: linear-gradient(90deg, transparent, var(--yellow), transparent);
+        border: 0;
+        border-radius: 999px;
+      }
+
+      .brand-copy {
+        display: grid;
+        gap: 0.04rem;
+      }
+
+      .brand-title {
+        color: var(--coal);
+        font-size: clamp(1.08rem, 1.7vw, 1.34rem);
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .brand-kicker {
+        color: rgba(43, 36, 24, 0.66);
+        font-size: 0.62rem;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+        line-height: 1;
+        text-transform: uppercase;
       }
 
       .nav-links {
@@ -536,46 +580,83 @@
       .gold-band {
         color: var(--coal);
         background:
-          radial-gradient(circle at 82% 8%, rgba(255, 241, 184, 0.6), transparent 18rem),
-          radial-gradient(circle at 12% 18%, rgba(255, 217, 90, 0.38), transparent 18rem),
-          linear-gradient(135deg, #fff1b8, #f5b800);
+          radial-gradient(circle at 50% 44%, rgba(245, 184, 0, 0.26), transparent 24rem),
+          radial-gradient(circle at 18% 22%, rgba(255, 217, 90, 0.18), transparent 18rem),
+          linear-gradient(145deg, #060605 0%, #171714 48%, #070706 100%);
       }
 
       .gold-band .eyebrow,
       .gold-band .wide-copy {
-        color: rgba(43, 36, 24, 0.74);
+        color: rgba(244, 232, 210, 0.74);
+      }
+
+      .gold-band h2 {
+        color: var(--bone);
       }
 
       .chapter-grid {
+        position: relative;
+        isolation: isolate;
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: clamp(0.8rem, 2vw, 1rem);
-        align-items: stretch;
+        grid-template-columns: minmax(12rem, 0.82fr) minmax(22rem, 1.4fr) minmax(12rem, 0.82fr);
+        gap: clamp(0.9rem, 2.6vw, 1.8rem);
+        align-items: center;
+        margin-top: clamp(1rem, 3vw, 2rem);
+        padding: clamp(1rem, 2.5vw, 2rem);
+        overflow: hidden;
+        background:
+          linear-gradient(115deg, rgba(255, 217, 90, 0.08), transparent 28%),
+          radial-gradient(circle at 50% 52%, rgba(245, 184, 0, 0.08), transparent 38%),
+          linear-gradient(145deg, #050504, #0b0b08 58%, #050504);
+        border: 1px solid rgba(255, 217, 90, 0.18);
+        border-radius: 1.35rem;
+        box-shadow: 0 34px 90px rgba(0, 0, 0, 0.4);
+      }
+
+      .chapter-grid::before {
+        display: none;
       }
 
       .chapter {
         position: relative;
         overflow: hidden;
         min-height: auto;
-        padding: clamp(1rem, 2vw, 1.25rem);
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.8rem;
+        align-items: start;
+        padding: 0.95rem 1rem;
         background:
-          radial-gradient(circle at 86% 14%, rgba(255, 241, 184, 0.68), transparent 6.5rem),
-          linear-gradient(150deg, rgba(255, 241, 184, 0.95), rgba(217, 154, 0, 0.48));
-        border: 1px solid rgba(255, 217, 90, 0.34);
+          linear-gradient(135deg, rgba(245, 184, 0, 0.94), rgba(255, 217, 90, 0.84)),
+          radial-gradient(circle at 100% 0, rgba(255, 241, 184, 0.42), transparent 8rem);
+        border: 1px solid rgba(255, 241, 184, 0.42);
         border-radius: 0.8rem;
-        box-shadow: 0 14px 34px rgba(140, 106, 24, 0.22);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 241, 184, 0.35),
+          inset 0 -14px 28px rgba(140, 106, 24, 0.26),
+          0 22px 38px rgba(0, 0, 0, 0.34);
+        transform: translateZ(0);
       }
 
       .chapter::before {
-        position: absolute;
-        right: -0.2rem;
-        bottom: -0.55rem;
-        color: rgba(140, 106, 24, 0.1);
-        content: "BIEN";
-        font-size: clamp(2.6rem, 5vw, 3.6rem);
+        position: relative;
+        z-index: 1;
+        display: grid;
+        width: 2.45rem;
+        height: 2.45rem;
+        place-items: center;
+        color: var(--yellow);
+        content: attr(data-step);
+        background:
+          radial-gradient(circle at 35% 20%, rgba(255, 241, 184, 0.18), transparent 40%),
+          linear-gradient(145deg, #171714, #020201);
+        border: 1px solid rgba(255, 217, 90, 0.34);
+        border-radius: 50%;
+        box-shadow: 0 12px 22px rgba(0, 0, 0, 0.42);
+        font-size: 0.92rem;
         font-weight: 950;
         letter-spacing: 0;
-        line-height: 1;
+        line-height: 1; 
       }
 
       .chapter::after {
@@ -584,18 +665,24 @@
         pointer-events: none;
         content: "";
         background-image:
-          radial-gradient(circle, rgba(43, 36, 24, 0.16) 0 1px, transparent 1.6px),
-          linear-gradient(28deg, transparent 0 54%, rgba(43, 36, 24, 0.08) 54.1% 54.35%, transparent 54.45% 100%);
+          radial-gradient(circle, rgba(255, 217, 90, 0.2) 0 1px, transparent 1.6px),
+          linear-gradient(28deg, transparent 0 54%, rgba(23, 23, 20, 0.08) 54.1% 54.35%, transparent 54.45% 100%);
         background-size: 4.5rem 4.5rem, 100% 100%;
-        opacity: 0.28;
+        opacity: 0.34;
+      }
+
+      .chapter-content {
+        position: relative;
+        z-index: 1;
       }
 
       .chapter strong {
         position: relative;
         z-index: 1;
         display: block;
-        margin-bottom: 0.5rem;
-        font-size: clamp(1.08rem, 2vw, 1.22rem);
+        margin-bottom: 0.35rem;
+        color: #11110f;
+        font-size: clamp(1rem, 1.7vw, 1.12rem);
         line-height: 1.1;
       }
 
@@ -603,9 +690,101 @@
         position: relative;
         z-index: 1;
         margin-bottom: 0;
-        color: #2b2418;
-        font-size: clamp(0.98rem, 1.55vw, 1.05rem);
-        line-height: 1.42;
+        color: rgba(23, 23, 20, 0.78);
+        font-size: 0.92rem;
+        line-height: 1.35;
+      }
+
+      .chapter:nth-of-type(1),
+      .chapter:nth-of-type(2),
+      .chapter:nth-of-type(3) {
+        grid-column: 1;
+      }
+
+      .chapter:nth-of-type(4),
+      .chapter:nth-of-type(5),
+      .chapter:nth-of-type(6) {
+        grid-column: 3;
+      }
+
+      .chapter-orbit {
+        position: relative;
+        grid-column: 2;
+        grid-row: 1 / span 3;
+        display: grid;
+        min-height: clamp(24rem, 42vw, 36rem);
+        place-items: center;
+      }
+
+      .chapter-orbit::before {
+        display: none;
+      }
+
+      .chapter-orbit::after {
+        display: none;
+      }
+
+      .orbit-book {
+        position: relative;
+        z-index: 1;
+        width: min(42rem, 100%);
+        margin-top: 1rem;
+        background: #000;
+        filter: drop-shadow(0 34px 35px rgba(0, 0, 0, 0.52));
+      }
+
+      .orbit-book img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 0.45rem;
+        object-fit: contain;
+      }
+
+      .orbit-copy {
+        position: absolute;
+        z-index: 2;
+        top: auto;
+        bottom: 7%;
+        left: 50%;
+        display: grid;
+        width: min(25rem, 76%);
+        max-width: 25rem;
+        padding: 0.9rem 1.15rem;
+        transform: translateX(-50%);
+        gap: 0.34rem;
+        background:
+          radial-gradient(circle at 35% 10%, rgba(255, 217, 90, 0.18), transparent 48%),
+          linear-gradient(145deg, rgba(23, 23, 20, 0.94), rgba(0, 0, 0, 0.92));
+        border: 1px solid rgba(255, 217, 90, 0.22);
+        border-radius: 0.9rem;
+        align-content: center;
+        color: var(--bone);
+        text-align: center;
+        box-shadow: 0 22px 50px rgba(0, 0, 0, 0.42);
+      }
+
+      .orbit-copy span {
+        display: block;
+        color: var(--yellow);
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .orbit-copy strong {
+        display: block;
+        font-size: clamp(1.25rem, 2.1vw, 1.75rem);
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .orbit-copy small {
+        display: block;
+        color: rgba(244, 232, 210, 0.72);
+        font-size: 0.78rem;
+        line-height: 1.25;
       }
 
       .fragments {
@@ -768,7 +947,22 @@
         margin-top: 1.5rem;
       }
 
-      .email-form input {
+      .order-form {
+        display: grid;
+        width: min(46rem, 100%);
+        gap: 0.8rem;
+        margin-top: 1.5rem;
+      }
+
+      .order-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+
+      .email-form input,
+      .order-form input,
+      .order-form select {
         min-width: 0;
         flex: 1;
         padding: 0.95rem 1rem;
@@ -779,8 +973,19 @@
         font: inherit;
       }
 
-      .email-form input::placeholder {
+      .order-form select {
+        appearance: none;
+      }
+
+      .email-form input::placeholder,
+      .order-form input::placeholder {
         color: #8f99aa;
+      }
+
+      .order-helper {
+        margin: 0;
+        color: rgba(43, 36, 24, 0.68);
+        font-size: 0.88rem;
       }
 
       .form-note {
@@ -853,6 +1058,50 @@
           min-height: 28rem;
         }
 
+        .chapter-orbit,
+        .chapter:nth-of-type(n) {
+          grid-column: 1;
+        }
+
+        .chapter-orbit {
+          grid-row: auto;
+          min-height: 24rem;
+        }
+
+        .chapter-orbit::before {
+          width: min(22rem, 84vw);
+        }
+
+        .chapter-orbit::after {
+          inset: 17%;
+          width: auto;
+        }
+
+        .orbit-book {
+          width: min(36rem, 112%);
+        }
+
+        .orbit-copy {
+          bottom: 4%;
+          width: min(20rem, 86vw);
+          max-width: 20rem;
+          padding: 0.78rem 0.9rem;
+          transform: translateX(-50%);
+        }
+
+        .orbit-copy span {
+          font-size: 0.68rem;
+          letter-spacing: 0.14em;
+        }
+
+        .orbit-copy strong {
+          font-size: clamp(1.2rem, 6vw, 1.45rem);
+        }
+
+        .orbit-copy small {
+          font-size: 0.72rem;
+        }
+
         .cta-panel {
           align-items: start;
         }
@@ -863,23 +1112,27 @@
           padding-inline: 1rem;
         }
 
-        .brand span:last-child {
+        .brand-kicker {
           display: none;
         }
 
         .hero-actions,
         .email-form,
+        .order-grid,
         .footer-inner {
           flex-direction: column;
           align-items: stretch;
         }
 
-        .email-form {
+        .email-form,
+        .order-grid {
           display: flex;
         }
 
         .button,
-        .email-form input {
+        .email-form input,
+        .order-form input,
+        .order-form select {
           width: 100%;
         }
 
@@ -904,15 +1157,18 @@
     <div class="page">
       <nav class="nav" aria-label="Navegación principal">
         <div class="brand">
-          <span class="mark">?</span>
-          <span>¿Cómo estás?</span>
+          <span class="mark">¿?</span>
+          <span class="brand-copy">
+            <span class="brand-title">¿Cómo estás?</span>
+            <span class="brand-kicker">Preventa disponible</span>
+          </span>
         </div>
         <div class="nav-links">
           <a href="#libro">El libro</a>
           <a href="#comprar">Comprar</a>
           <a href="#muestra">Muestra</a>
           <a href="#autor">Autor</a>
-          <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Comprar ahora</a>
+          <a class="button" href="#orderForm">Comprar ahora</a>
         </div>
       </nav>
 
@@ -927,7 +1183,7 @@
               que cambia cómo vives y cómo amas.
             </p>
             <div class="hero-actions">
-              <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Pagar preventa $47.000</a>
+              <a class="button" href="#orderForm">Pagar preventa $47.000</a>
               <a class="button secondary" href="#muestra">Leer capítulo 1</a>
             </div>
             <div class="launch-strip" aria-label="Datos de lanzamiento">
@@ -967,21 +1223,51 @@
               </p>
             </div>
             <div class="chapter-grid">
-              <article class="chapter">
-                <strong>Leer lo que sientes</strong>
-                <p>Un lenguaje claro para reconocer señales internas antes de que se conviertan en ruido.</p>
+              <article class="chapter" data-step="01">
+                <div class="chapter-content">
+                  <strong>Leer lo que sientes</strong>
+                  <p>Reconoce señales internas antes de que se conviertan en ruido.</p>
+                </div>
               </article>
-              <article class="chapter">
-                <strong>Nombrar lo que cargas</strong>
-                <p>Palabras para distinguir cansancio, miedo, culpa, deseo, tristeza y necesidad.</p>
+              <article class="chapter" data-step="02">
+                <div class="chapter-content">
+                  <strong>Nombrar lo que cargas</strong>
+                  <p>Distingue cansancio, miedo, culpa, deseo, tristeza y necesidad.</p>
+                </div>
               </article>
-              <article class="chapter">
-                <strong>Entender tu historia</strong>
-                <p>Una mirada a los aprendizajes emocionales que siguen decidiendo por ti.</p>
+              <article class="chapter" data-step="03">
+                <div class="chapter-content">
+                  <strong>Entender tu historia</strong>
+                  <p>Mira los aprendizajes emocionales que siguen decidiendo por ti.</p>
+                </div>
               </article>
-              <article class="chapter">
-                <strong>Vivir y amar distinto</strong>
-                <p>Herramientas para responder con más consciencia en tus vínculos y decisiones.</p>
+              <div class="chapter-orbit" aria-hidden="true">
+                <div class="orbit-book">
+                  <img src="assets/images/libro-manta-amarilla.png" alt="">
+                </div>
+                <div class="orbit-copy">
+                  <span>13 capítulos</span>
+                  <strong>Alfabetismo emocional</strong>
+                  <small>Un mapa para responder distinto a la pregunta más simple.</small>
+                </div>
+              </div>
+              <article class="chapter" data-step="04">
+                <div class="chapter-content">
+                  <strong>Escuchar el cuerpo</strong>
+                  <p>Conecta síntomas, tensión y emociones con más claridad.</p>
+                </div>
+              </article>
+              <article class="chapter" data-step="05">
+                <div class="chapter-content">
+                  <strong>Responder distinto</strong>
+                  <p>Pasa del automático a decisiones más conscientes.</p>
+                </div>
+              </article>
+              <article class="chapter" data-step="06">
+                <div class="chapter-content">
+                  <strong>Vivir y amar mejor</strong>
+                  <p>Herramientas para tus vínculos, límites y forma de dar.</p>
+                </div>
               </article>
             </div>
           </div>
@@ -1157,7 +1443,7 @@
                 <p>
                   La muestra se lee aquí mismo en formato web para evitar problemas de visor PDF en móviles.
                 </p>
-                <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Comprar el libro</a>
+                <a class="button" href="#orderForm">Comprar el libro</a>
               </div>
             </div>
           </div>
@@ -1193,20 +1479,33 @@
                 Paga de forma segura por Bold y asegura el precio especial de $47.000 COP.
                 El precio full será $79.900 COP después de la preventa.
               </p>
-              <div class="hero-actions">
-                <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Pagar con Bold</a>
-                <a class="button whatsapp" href="https://wa.me/573238016527?text=Hola%2C%20tengo%20una%20pregunta%20antes%20de%20comprar%20%C2%BFC%C3%B3mo%20est%C3%A1s%3F">Tengo una pregunta</a>
-              </div>
               <p class="payment-note">
-                Vas a pagar $47.000 COP a Jv bienestar y salud mental, un negocio Master en Bold con datos verificados.
+                Primero registramos tus datos de reserva. Después irás al checkout seguro de Bold.
               </p>
-              <form class="email-form" id="emailForm">
-                <input type="email" id="email" name="email" placeholder="tu correo" aria-label="Correo electrónico" required>
-                <button class="button secondary" type="submit">Avisarme</button>
+              <form class="order-form" id="orderForm">
+                <div class="order-grid">
+                  <input type="text" id="fullName" name="full_name" placeholder="Nombre completo" autocomplete="name" required>
+                  <input type="tel" id="phone" name="phone" placeholder="WhatsApp" autocomplete="tel" required>
+                  <input type="email" id="orderEmail" name="email" placeholder="Correo electrónico" autocomplete="email">
+                  <input type="text" id="city" name="city" placeholder="Ciudad" autocomplete="address-level2">
+                  <input type="text" id="address" name="address" placeholder="Dirección de entrega opcional" autocomplete="street-address">
+                  <select id="quantity" name="quantity" aria-label="Cantidad de libros">
+                    <option value="1">1 libro · $47.000 COP</option>
+                    <option value="2">2 libros · $94.000 COP</option>
+                    <option value="3">3 libros · $141.000 COP</option>
+                  </select>
+                </div>
+                <p class="order-helper">
+                  Al continuar crearemos tu reserva y te enviaremos a Bold para pagar.
+                </p>
+                <div class="hero-actions">
+                  <button class="button" type="submit">Crear reserva y pagar</button>
+                  <a class="button whatsapp" href="https://wa.me/573238016527?text=Hola%2C%20tengo%20una%20pregunta%20antes%20de%20comprar%20%C2%BFC%C3%B3mo%20est%C3%A1s%3F">Tengo una pregunta</a>
+                </div>
               </form>
-              <div class="form-note" id="formNote" role="status"></div>
+              <div class="form-note" id="orderNote" role="status"></div>
             </div>
-            <a class="button" href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Comprar ahora</a>
+            <a class="button" href="#comprar">Ver precio</a>
           </div>
         </section>
       </main>
@@ -1217,7 +1516,7 @@
             <div class="signature">Es posible <span class="butterfly">✦</span></div>
             <div>¿Cómo estás? · Javi Peñaloza · Lanzamiento 2 de septiembre</div>
           </div>
-          <a href="https://checkout.bold.co/payment/LNK_EQ616SHPPL">Comprar con Bold</a>
+          <a href="#orderForm">Comprar</a>
         </div>
       </footer>
     </div>
@@ -1225,8 +1524,8 @@
     <script>
       const PREORDER_TOTAL = 100;
       const PREORDER_REMAINING = 63;
-      const form = document.querySelector("#emailForm");
-      const note = document.querySelector("#formNote");
+      const orderForm = document.querySelector("#orderForm");
+      const orderNote = document.querySelector("#orderNote");
       const remainingCount = document.querySelector("#remainingCount");
       const heroRemaining = document.querySelector("#heroRemaining");
       const stockFill = document.querySelector("#stockFill");
@@ -1236,11 +1535,39 @@
       heroRemaining.textContent = PREORDER_REMAINING;
       stockFill.style.setProperty("--remaining", `${remainingPercent}%`);
 
-      form.addEventListener("submit", (event) => {
+      orderForm.addEventListener("submit", async (event) => {
         event.preventDefault();
-        const email = new FormData(form).get("email");
-        note.textContent = `Listo. Dejamos ${email} como correo de aviso en esta maqueta.`;
-        form.reset();
+        const submitButton = orderForm.querySelector('button[type="submit"]');
+        const formData = new FormData(orderForm);
+        const payload = Object.fromEntries(formData.entries());
+
+        orderNote.textContent = "Creando tu reserva...";
+        submitButton.disabled = true;
+        submitButton.textContent = "Creando reserva...";
+
+        try {
+          const response = await fetch("/.netlify/functions/create-order", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const result = await response.json();
+
+          if (!response.ok || !result.ok) {
+            throw new Error(result.error || "No pudimos crear la reserva.");
+          }
+
+          window.sessionStorage.setItem("comoEstasOrderCode", result.order_code);
+          orderNote.textContent = `Reserva ${result.order_code} creada. Te llevamos a Bold para pagar.`;
+          window.location.href = result.checkout_url;
+        } catch (error) {
+          orderNote.textContent = error.message || "No pudimos crear la reserva. Intenta de nuevo.";
+          submitButton.disabled = false;
+          submitButton.textContent = "Crear reserva y pagar";
+        }
       });
     </script>
   </body>

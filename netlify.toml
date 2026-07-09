@@ -1,6 +1,7 @@
 [build]
   publish = "site"
   command = ""
+  functions = "netlify/functions"
 
 [[headers]]
   for = "/assets/images/*"
