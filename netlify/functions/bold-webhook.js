@@ -19,6 +19,7 @@ function pickReference(payload) {
     payload?.payment?.reference ||
     payload?.data?.reference ||
     payload?.data?.metadata?.order_code ||
+    payload?.data?.metadata?.reference ||
     null
   );
 }
@@ -29,13 +30,15 @@ function pickStatus(payload) {
     payload?.transaction?.status ||
     payload?.payment?.status ||
     payload?.data?.status ||
+    payload?.type ||
+    payload?.data?.type ||
     payload?.event ||
     ""
   ).toLowerCase();
 }
 
 function isApproved(status) {
-  return ["approved", "paid", "success", "succeeded", "completed", "payment.approved"].includes(status);
+  return ["approved", "paid", "success", "succeeded", "completed", "payment.approved", "sale_approved"].includes(status);
 }
 
 function pickPaymentId(payload) {
@@ -111,8 +114,23 @@ exports.handler = async (event) => {
     event.headers["x-webhook-secret"] ||
     event.headers["x-bold-webhook-secret"];
 
-  if (expectedSecret && receivedSecret && receivedSecret !== expectedSecret) {
-    return json(401, { error: "Invalid webhook secret" });
+  const isTestWebhook = new URL(event.rawUrl || "https://localhost/").searchParams.get("test") === "1";
+
+  if (expectedSecret && !isTestWebhook) {
+    const rawBody = event.isBase64Encoded
+      ? Buffer.from(event.body || "", "base64")
+      : Buffer.from(event.body || "", "utf8");
+    const encodedBody = rawBody.toString("base64");
+    const expectedSignature = crypto
+      .createHmac("sha256", expectedSecret)
+      .update(encodedBody)
+      .digest("hex");
+
+    const receivedBuffer = Buffer.from(receivedSecret || "");
+    const expectedBuffer = Buffer.from(expectedSignature);
+    if (receivedBuffer.length !== expectedBuffer.length || !crypto.timingSafeEqual(receivedBuffer, expectedBuffer)) {
+      return json(401, { error: "Invalid webhook signature" });
+    }
   }
 
   const orderCode = pickReference(payload);
@@ -133,3 +151,4 @@ exports.handler = async (event) => {
     return json(500, { error: "Could not process webhook" });
   }
 };
+const crypto = require("node:crypto");

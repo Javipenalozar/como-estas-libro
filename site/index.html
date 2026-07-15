@@ -482,6 +482,51 @@
         font-size: 0.95rem;
       }
 
+      .reader-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        white-space: nowrap;
+      }
+
+      .reader-controls span {
+        min-width: 4rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 850;
+        text-align: center;
+      }
+
+      .reader-controls button:disabled {
+        cursor: not-allowed;
+        opacity: 0.42;
+      }
+
+      .policy-details {
+        width: min(46rem, 100%);
+        margin-top: 1.25rem;
+        color: var(--coal);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .policy-details summary {
+        padding: 1rem 0;
+        color: var(--warm-black);
+        cursor: pointer;
+        font-weight: 850;
+      }
+
+      .policy-copy {
+        padding: 0 0 1rem;
+        color: rgba(43, 36, 24, 0.76);
+        font-size: 0.92rem;
+      }
+
+      .policy-copy p:last-child {
+        margin-bottom: 0;
+      }
+
       .book-wrap {
         display: grid;
         place-items: center;
@@ -1175,7 +1220,7 @@
       <header class="hero">
         <div class="hero-grid">
           <div>
-            <p class="eyebrow">Preventa abierta · lanzamiento 2 de septiembre</p>
+            <p class="eyebrow">Preventa abierta · lanzamiento 2 de septiembre de 2026</p>
             <h1>¿Cómo estás?</h1>
             <p class="hero-copy">
               La pregunta que escuchas todos los días y que casi nadie sabe responder de verdad.
@@ -1381,69 +1426,21 @@
               </p>
             </div>
             <div class="reader-shell">
-              <div class="reader-pages" aria-label="Capítulo 1 de ¿Cómo estás?">
+              <div class="reader-pages" aria-label="Muestra de los capítulos 1 y 2">
                 <figure class="reader-page">
-                  <img src="assets/images/cap1/page-01.png" alt="Capítulo 1, página 1" loading="lazy">
-                  <figcaption>Página 1 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-02.png" alt="Capítulo 1, página 2" loading="lazy">
-                  <figcaption>Página 2 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-03.png" alt="Capítulo 1, página 3" loading="lazy">
-                  <figcaption>Página 3 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-04.png" alt="Capítulo 1, página 4" loading="lazy">
-                  <figcaption>Página 4 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-05.png" alt="Capítulo 1, página 5" loading="lazy">
-                  <figcaption>Página 5 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-06.png" alt="Capítulo 1, página 6" loading="lazy">
-                  <figcaption>Página 6 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-07.png" alt="Capítulo 1, página 7" loading="lazy">
-                  <figcaption>Página 7 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-08.png" alt="Capítulo 1, página 8" loading="lazy">
-                  <figcaption>Página 8 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-09.png" alt="Capítulo 1, página 9" loading="lazy">
-                  <figcaption>Página 9 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-10.png" alt="Capítulo 1, página 10" loading="lazy">
-                  <figcaption>Página 10 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-11.png" alt="Capítulo 1, página 11" loading="lazy">
-                  <figcaption>Página 11 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-12.png" alt="Capítulo 1, página 12" loading="lazy">
-                  <figcaption>Página 12 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-13.png" alt="Capítulo 1, página 13" loading="lazy">
-                  <figcaption>Página 13 de 14</figcaption>
-                </figure>
-                <figure class="reader-page">
-                  <img src="assets/images/cap1/page-14.png" alt="Capítulo 1, página 14" loading="lazy">
-                  <figcaption>Página 14 de 14</figcaption>
+                  <img id="readerPageImage" src="assets/images/cap1-2/page-01.png" alt="Capítulo 1, página 1" loading="eager">
+                  <figcaption id="readerPageCaption">Capítulo 1 · Página 1 de 31</figcaption>
                 </figure>
               </div>
               <div class="reader-actions">
                 <p>
-                  La muestra se lee aquí mismo en formato web para evitar problemas de visor PDF en móviles.
+                  Lee los capítulos 1 y 2 página por página. Usa los controles para avanzar sin recorrer un scroll interminable.
                 </p>
-                <a class="button" href="#orderForm">Comprar el libro</a>
+                <div class="reader-controls" aria-label="Controles de lectura">
+                  <button class="button secondary" id="readerPrevious" type="button">Anterior</button>
+                  <span id="readerProgress">1 / 31</span>
+                  <button class="button" id="readerNext" type="button">Siguiente</button>
+                </div>
               </div>
             </div>
           </div>
@@ -1479,24 +1476,42 @@
                 Paga de forma segura por Bold y asegura el precio especial de $47.000 COP.
                 El precio full será $79.900 COP después de la preventa.
               </p>
+              <p class="wide-copy">
+                Los despachos comienzan el 3 de septiembre de 2026. El tiempo de entrega depende de la ciudad y de la logística de la transportadora. También puedes recoger tu ejemplar desde esa fecha en la oficina de Modelia: calle 23G #81-66, Bogotá, coordinando previamente por WhatsApp.
+              </p>
+              <p class="wide-copy">
+                Cambios, devoluciones y retracto se atienden según la política publicada para esta compra y los derechos del consumidor aplicables en Colombia.
+              </p>
+              <details class="policy-details">
+                <summary>Política de cambios, devoluciones y retracto</summary>
+                <div class="policy-copy">
+                  <p><strong>Compra por internet.</strong> Esta venta se realiza a distancia. Puedes ejercer el derecho de retracto dentro de los cinco (5) días hábiles siguientes a la entrega del libro, siempre que lo devuelvas sin uso y en las mismas condiciones en que lo recibiste. Los costos de devolución por retracto están a cargo del comprador, conforme a la ley aplicable.</p>
+                  <p><strong>Libro defectuoso, incompleto, equivocado o averiado.</strong> Escríbenos por WhatsApp tan pronto lo recibas, con tu número de pedido y fotografías. Revisaremos el caso y, si corresponde, gestionaremos el cambio o la solución que aplique bajo la garantía legal, sin trasladarte costos causados por el defecto o el error de despacho.</p>
+                  <p><strong>Cambios por preferencia personal.</strong> No ofrecemos cambios por gusto, color o decisión posterior cuando el libro fue entregado correctamente, salvo que resulte aplicable el derecho de retracto.</p>
+                  <p><strong>Recogida en Bogotá.</strong> Puedes recoger el libro desde el 3 de septiembre de 2026 en la oficina de Modelia, calle 23G #81-66, Bogotá, coordinando previamente por WhatsApp. Esta opción no genera domicilio.</p>
+                  <p><strong>Procedimiento.</strong> Contacto: <a href="https://wa.me/573238016527">WhatsApp 323 801 6527</a>. Indica nombre, número de pedido, fecha de compra y motivo. Las devoluciones deben coordinarse antes de enviarse o entregarse.</p>
+                  <p><a href="https://www.sic.gov.co/" target="_blank" rel="noopener">Autoridad colombiana de protección al consumidor: Superintendencia de Industria y Comercio.</a></p>
+                </div>
+              </details>
               <p class="payment-note">
                 Primero registramos tus datos de reserva. Después irás al checkout seguro de Bold.
+                El valor del domicilio no está incluido: se calcula y cobra por separado según la ciudad.
               </p>
-              <form class="order-form" id="orderForm">
+              <form class="order-form" id="orderForm" method="post">
                 <div class="order-grid">
                   <input type="text" id="fullName" name="full_name" placeholder="Nombre completo" autocomplete="name" required>
                   <input type="tel" id="phone" name="phone" placeholder="WhatsApp" autocomplete="tel" required>
                   <input type="email" id="orderEmail" name="email" placeholder="Correo electrónico" autocomplete="email">
-                  <input type="text" id="city" name="city" placeholder="Ciudad" autocomplete="address-level2">
-                  <input type="text" id="address" name="address" placeholder="Dirección de entrega opcional" autocomplete="street-address">
-                  <select id="quantity" name="quantity" aria-label="Cantidad de libros">
-                    <option value="1">1 libro · $47.000 COP</option>
-                    <option value="2">2 libros · $94.000 COP</option>
-                    <option value="3">3 libros · $141.000 COP</option>
+                  <input type="text" id="city" name="city" placeholder="Ciudad" autocomplete="address-level2" required>
+                  <select id="deliveryMethod" name="delivery_method" required>
+                    <option value="shipping">Envío a domicilio (domicilio adicional)</option>
+                    <option value="pickup">Recoger en oficina de Modelia (desde 3 de septiembre)</option>
                   </select>
+                  <input type="text" id="address" name="address" placeholder="Dirección de entrega" autocomplete="street-address" required>
+                  <input type="hidden" id="quantity" name="quantity" value="1">
                 </div>
                 <p class="order-helper">
-                  Al continuar crearemos tu reserva y te enviaremos a Bold para pagar.
+                  1 libro · $47.000 COP. El domicilio se cobra por separado según ciudad y transportadora.
                 </p>
                 <div class="hero-actions">
                   <button class="button" type="submit">Crear reserva y pagar</button>
@@ -1514,7 +1529,7 @@
         <div class="footer-inner">
           <div>
             <div class="signature">Es posible <span class="butterfly">✦</span></div>
-            <div>¿Cómo estás? · Javi Peñaloza · Lanzamiento 2 de septiembre</div>
+            <div>¿Cómo estás? · Javi Peñaloza · Lanzamiento 2 de septiembre de 2026</div>
           </div>
           <a href="#orderForm">Comprar</a>
         </div>
@@ -1529,11 +1544,62 @@
       const remainingCount = document.querySelector("#remainingCount");
       const heroRemaining = document.querySelector("#heroRemaining");
       const stockFill = document.querySelector("#stockFill");
+      const deliveryMethod = document.querySelector("#deliveryMethod");
+      const cityInput = document.querySelector("#city");
+      const addressInput = document.querySelector("#address");
+
+      function updateDeliveryFields() {
+        const isPickup = deliveryMethod.value === "pickup";
+        addressInput.required = !isPickup;
+        addressInput.disabled = isPickup;
+        addressInput.placeholder = isPickup ? "No aplica para recogida" : "Dirección de entrega";
+        if (isPickup) {
+          addressInput.value = "";
+          if (!cityInput.value) cityInput.value = "Bogotá";
+        }
+      }
+
+      deliveryMethod.addEventListener("change", updateDeliveryFields);
+      updateDeliveryFields();
 
       const remainingPercent = Math.max(0, Math.min(100, (PREORDER_REMAINING / PREORDER_TOTAL) * 100));
       remainingCount.textContent = PREORDER_REMAINING;
       heroRemaining.textContent = PREORDER_REMAINING;
       stockFill.style.setProperty("--remaining", `${remainingPercent}%`);
+
+      const READER_TOTAL = 31;
+      let readerPage = 1;
+      const readerImage = document.querySelector("#readerPageImage");
+      const readerCaption = document.querySelector("#readerPageCaption");
+      const readerProgress = document.querySelector("#readerProgress");
+      const readerPrevious = document.querySelector("#readerPrevious");
+      const readerNext = document.querySelector("#readerNext");
+
+      function renderReaderPage() {
+        const chapter = readerPage <= 15 ? "Capítulo 1" : "Capítulo 2";
+        readerImage.src = `assets/images/cap1-2/page-${String(readerPage).padStart(2, "0")}.png`;
+        readerImage.alt = `${chapter}, página ${readerPage} de ${READER_TOTAL}`;
+        readerCaption.textContent = `${chapter} · Página ${readerPage} de ${READER_TOTAL}`;
+        readerProgress.textContent = `${readerPage} / ${READER_TOTAL}`;
+        readerPrevious.disabled = readerPage === 1;
+        readerNext.disabled = readerPage === READER_TOTAL;
+      }
+
+      readerPrevious.addEventListener("click", () => {
+        if (readerPage > 1) {
+          readerPage -= 1;
+          renderReaderPage();
+        }
+      });
+
+      readerNext.addEventListener("click", () => {
+        if (readerPage < READER_TOTAL) {
+          readerPage += 1;
+          renderReaderPage();
+        }
+      });
+
+      renderReaderPage();
 
       orderForm.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -1561,8 +1627,31 @@
           }
 
           window.sessionStorage.setItem("comoEstasOrderCode", result.order_code);
-          orderNote.textContent = `Reserva ${result.order_code} creada. Te llevamos a Bold para pagar.`;
-          window.location.href = result.checkout_url;
+          orderNote.textContent = `Reserva ${result.order_code} creada. Cargando pago seguro de Bold...`;
+          submitButton.hidden = true;
+          const boldButton = document.createElement("script");
+          boldButton.src = "https://checkout.bold.co/library/boldPaymentButton.js";
+          boldButton.dataset.boldButton = "dark-L";
+          boldButton.dataset.orderId = result.bold.order_id;
+          boldButton.dataset.currency = result.bold.currency;
+          boldButton.dataset.amount = String(result.bold.amount);
+          boldButton.dataset.apiKey = result.bold.api_key;
+          boldButton.dataset.integritySignature = result.bold.integrity_signature;
+          boldButton.dataset.description = result.bold.description;
+          boldButton.dataset.redirectionUrl = result.bold.redirection_url;
+          boldButton.dataset.customerData = JSON.stringify({
+            email: payload.email || "",
+            fullName: payload.full_name,
+            phone: payload.phone,
+            dialCode: "+57",
+          });
+          boldButton.dataset.billingAddress = JSON.stringify({
+            address: payload.address || "",
+            city: payload.city,
+            country: "CO",
+          });
+          orderForm.querySelector(".hero-actions").appendChild(boldButton);
+          orderNote.textContent = `Reserva ${result.order_code} creada. Usa el botón de Bold para pagar.`;
         } catch (error) {
           orderNote.textContent = error.message || "No pudimos crear la reserva. Intenta de nuevo.";
           submitButton.disabled = false;

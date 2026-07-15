@@ -1,3 +1,5 @@
+const crypto = require("node:crypto");
+
 const BOLD_CHECKOUT_URL = "https://checkout.bold.co/payment/LNK_EQ616SHPPL";
 const PREORDER_PRICE_COP = 47000;
 
@@ -25,6 +27,13 @@ function makeOrderCode() {
   const stamp = now.toISOString().slice(2, 10).replace(/-/g, "");
   const random = Math.random().toString(36).slice(2, 7).toUpperCase();
   return `COMOESTAS-${stamp}-${random}`;
+}
+
+function makeIntegritySignature(orderCode, amountCop, currency, secretKey) {
+  return crypto
+    .createHash("sha256")
+    .update(`${orderCode}${amountCop}${currency}${secretKey}`)
+    .digest("hex");
 }
 
 async function insertOrder(order) {
@@ -78,7 +87,22 @@ exports.handler = async (event) => {
   const phone = digitsOnly(body.phone);
   const city = clean(body.city);
   const address = clean(body.address);
-  const quantity = Math.max(1, Math.min(10, Number.parseInt(body.quantity || "1", 10) || 1));
+  const deliveryMethod = clean(body.delivery_method) || "shipping";
+  const requestedQuantity = Number.parseInt(body.quantity || "1", 10) || 1;
+
+  if (requestedQuantity !== 1) {
+    return json(400, { error: "Por ahora solo puedes reservar 1 libro por compra." });
+  }
+
+  const quantity = 1;
+
+  if (!['shipping', 'pickup'].includes(deliveryMethod)) {
+    return json(400, { error: "Selecciona una modalidad de entrega válida." });
+  }
+
+  if (deliveryMethod === "shipping" && address.length < 5) {
+    return json(400, { error: "Escribe la dirección de entrega." });
+  }
 
   if (fullName.length < 3) {
     return json(400, { error: "Escribe tu nombre completo." });
@@ -94,6 +118,12 @@ exports.handler = async (event) => {
 
   const orderCode = makeOrderCode();
   const amountCop = PREORDER_PRICE_COP * quantity;
+  const boldIdentityKey = clean(process.env.BOLD_IDENTITY_KEY);
+  const boldSecretKey = clean(process.env.BOLD_SECRET_KEY || process.env.BOLD_WEBHOOK_SECRET);
+
+  if (!boldIdentityKey || !boldSecretKey) {
+    return json(500, { error: "Faltan las llaves de integración de Bold en Netlify." });
+  }
 
   const order = {
     order_code: orderCode,
@@ -101,7 +131,9 @@ exports.handler = async (event) => {
     email: email || null,
     phone,
     city: city || null,
-    address: address || null,
+    address: deliveryMethod === "pickup"
+      ? "Recogida en oficina de Modelia, calle 23G #81-66, Bogotá"
+      : address,
     quantity,
     amount_cop: amountCop,
     status: "pending",
@@ -112,8 +144,21 @@ exports.handler = async (event) => {
     return json(200, {
       ok: true,
       order_code: savedOrder.order_code,
-      checkout_url: BOLD_CHECKOUT_URL,
-      warning: "El checkout actual de Bold es fijo. Falta confirmar cómo pasar esta referencia a Bold.",
+      bold: {
+        api_key: boldIdentityKey,
+        order_id: savedOrder.order_code,
+        amount: amountCop,
+        currency: "COP",
+        integrity_signature: makeIntegritySignature(
+          savedOrder.order_code,
+          amountCop,
+          "COP",
+          boldSecretKey,
+        ),
+        description: "Libro ¿Cómo estás?",
+        redirection_url: "https://comoestas.eventosjv.com/",
+      },
+      warning: "El domicilio se cobra por separado según ciudad y transportadora.",
     });
   } catch (error) {
     console.error(error);
